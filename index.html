@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>返信準備メーカー</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="app">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Local reply prep tool</p>
+          <h1>返信準備メーカー</h1>
+        </div>
+        <p class="privacy-note">AI APIや外部送信は使わず、入力内容はこのブラウザ内だけで扱います。</p>
+      </header>
+
+      <section class="workspace" aria-label="返信準備プロンプト作成">
+        <form id="promptForm" class="panel form-panel">
+          <div class="section-title">
+            <h2>入力</h2>
+          </div>
+
+          <div class="field-grid two-columns">
+            <label class="field">
+              <span>連絡手段</span>
+              <select id="contactMethod" name="contactMethod">
+                <option value="メール">メール</option>
+                <option value="ショートメール / SMS">ショートメール / SMS</option>
+                <option value="LINE">LINE</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>相手との関係</span>
+              <select id="relationship" name="relationship">
+                <option value="取引先">取引先</option>
+                <option value="お客様">お客様</option>
+                <option value="上司">上司</option>
+                <option value="同僚">同僚</option>
+                <option value="友人">友人</option>
+                <option value="家族">家族</option>
+                <option value="その他">その他</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>相手の名前</span>
+              <input id="personName" name="personName" type="text" placeholder="例：山田さん、佐藤様">
+            </label>
+
+            <label class="field">
+              <span>返信の温度感</span>
+              <select id="replyTone" name="replyTone">
+                <option value="丁寧">丁寧</option>
+                <option value="普通" selected>普通</option>
+                <option value="やわらかめ">やわらかめ</option>
+                <option value="短く用件だけ">短く用件だけ</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>返信の長さ</span>
+              <select id="replyLength" name="replyLength">
+                <option value="短め">短め</option>
+                <option value="普通" selected>普通</option>
+                <option value="少し長め">少し長め</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label class="field">
+              <span>相手から来た文章</span>
+              <textarea id="incomingMessage" name="incomingMessage" rows="6" placeholder="相手から届いた文章を貼り付けます。"></textarea>
+            </label>
+
+            <label class="field">
+              <span>こちらが伝えたいこと</span>
+              <textarea id="mainPoint" name="mainPoint" rows="4" placeholder="返信で伝えたい方向性や結論を書きます。"></textarea>
+            </label>
+
+            <label class="field">
+              <span>絶対に入れたい内容</span>
+              <textarea id="mustInclude" name="mustInclude" rows="3" placeholder="日時、条件、お礼、謝罪、確認事項など。"></textarea>
+            </label>
+
+            <label class="field">
+              <span>できれば避けたい言い方</span>
+              <textarea id="avoidWording" name="avoidWording" rows="3" placeholder="強すぎる表現、曖昧な言い方、使いたくない言葉など。"></textarea>
+            </label>
+          </div>
+        </form>
+
+        <section class="panel output-panel" aria-label="返信準備プロンプト">
+          <div class="section-title output-title">
+            <h2>返信準備プロンプト</h2>
+            <div class="button-row">
+              <button id="copyButton" class="button primary" type="button">コピー</button>
+              <button id="downloadButton" class="button" type="button">TXT</button>
+              <button id="resetButton" class="button subtle" type="button">リセット</button>
+            </div>
+          </div>
+          <textarea id="generatedPrompt" class="prompt-output" readonly aria-label="生成された返信準備プロンプト"></textarea>
+          <p id="statusMessage" class="status" role="status" aria-live="polite"></p>
+        </section>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
